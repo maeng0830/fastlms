@@ -4,4 +4,6 @@ import com.maeng0830.fastlms.member.model.MemberInput;
 
 public interface MemberService {
     boolean register(MemberInput parameter);
+
+    boolean emailAuth(String uuid);
 }

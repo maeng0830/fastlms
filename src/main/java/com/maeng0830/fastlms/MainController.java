@@ -9,6 +9,8 @@ package com.maeng0830.fastlms;
 // 메소드가 적절하다.
 
 
+import com.maeng0830.fastlms.components.MailComponents;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,11 +19,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@RequiredArgsConstructor
 @Controller // 매핑을 위한 클래스
 public class MainController {
+    private final MailComponents mailComponents;
+
     @RequestMapping("/")
     public String index() {
 
+        /*String mail = "kmk930830@naver.com";
+        String subject = "안녕하세요. 회원 가입 안내 메일입니다.";
+        String text = "<p>안녕하세요.</p><p>반갑습니다.</p>";
+
+        mailComponents.sendMail(mail, subject, text);*/
         return "index";
     }
 
