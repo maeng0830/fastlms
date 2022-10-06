@@ -1,5 +1,6 @@
-package com.maeng0830.fastlms;
+package com.maeng0830.fastlms.configuration;
 
+import com.maeng0830.fastlms.FastlmsApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

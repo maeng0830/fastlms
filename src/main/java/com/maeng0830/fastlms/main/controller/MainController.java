@@ -1,4 +1,4 @@
-package com.maeng0830.fastlms;
+package com.maeng0830.fastlms.main.controller;
 
 // MainPage 클래스의 목적
 // 주소와(논리적인주소, 인터넷주소) 물리적인파일(프로그래밍을 위한)을 매핑
