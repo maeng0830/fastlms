@@ -1,4 +1,4 @@
-package com.maeng0830.fastlms.admin;
+package com.maeng0830.fastlms.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
