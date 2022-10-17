@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.parameters.P;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +32,9 @@ public class CourseDto {
     LocalDateTime regDt;
     LocalDateTime udtDt;
 
+    String fileName;
+    String urlFileName;
+
     //추가 컬럼
     long totalCount;
     long seq;
@@ -50,6 +53,8 @@ public class CourseDto {
                 .saleEndDt(course.getSaleEndDt())
                 .regDt(course.getRegDt())
                 .udtDt(course.getUdtDt())
+                .fileName(course.getFileName())
+                .urlFileName(course.getUrlFileName())
                 .build();
     }
 
@@ -64,5 +69,10 @@ public class CourseDto {
             courseList.add(CourseDto.of(x));
         }
         return courseList;
+    }
+
+    public String getRegDtText() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+        return regDt != null ? regDt.format(formatter) : "";
     }
 }

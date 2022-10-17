@@ -8,5 +8,24 @@
         <h1>메인 페이지</h1>
         <div th:replace="/fragments/layout.html::fragment-body-menu"></div>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+        <div class="home__slider">
+            <div class="bxslider">
+                <div th:each="banner: ${list}">
+                    <a th:ref="${banner.linkUrl}" th:target="${banner.openMethod}"><img th:src="${banner.urlFileName}" th:alt="${banner.bannerName}"></a>
+                </div>
+            </div>
+        </div>
     </body>
+
+    <script>
+        $(function(){
+            $('.bxslider').bxSlider({
+                slideWidth: 1000
+            });
+        });
+    </script>
 </html>

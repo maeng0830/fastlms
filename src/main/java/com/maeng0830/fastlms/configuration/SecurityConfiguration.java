@@ -19,6 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final MemberService memberService;
+    private final UserAuthenticationSuccessHandler userAuthenticationSuccessHandler;
 
     @Bean
     PasswordEncoder getPasswordEncoder() {
@@ -28,6 +29,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     UserAuthenticationFailureHandler getFailureHandler() {
         return new UserAuthenticationFailureHandler();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+
+        web.ignoring().antMatchers("\\favicon.ico", "\\files\\**");
+        super.configure(web);
     }
 
     @Override
@@ -41,6 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/member/register",
                         "/member/email-auth",
                         "/member/find-password",
+                        "/files/**",
                         "/member/reset/password")
                 .permitAll();
 
@@ -50,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/member/login")
+                .successHandler(userAuthenticationSuccessHandler)
                 .failureHandler(getFailureHandler())
                 .permitAll();
 

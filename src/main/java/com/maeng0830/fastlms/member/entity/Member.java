@@ -22,6 +22,7 @@ public class Member implements MemberCode {
     private String phone;
     private String password;
     private LocalDateTime regDt;
+    private LocalDateTime udtDt;
 
     private boolean emailAuthYn;
     private LocalDateTime emailAuthDt;
@@ -30,7 +31,13 @@ public class Member implements MemberCode {
     private String resetPasswordKey;
     private LocalDateTime resetPasswordLimitDt;
 
+    private LocalDateTime loginDt;
+
     private boolean adminYn;
 
     private String userStatus; // 이용가능, 정지
+
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
 }

@@ -1,13 +1,9 @@
 package com.maeng0830.fastlms.admin.controller;
 
 import com.maeng0830.fastlms.admin.dto.CategoryDto;
-import com.maeng0830.fastlms.admin.dto.MemberDto;
 import com.maeng0830.fastlms.admin.model.CategoryInput;
-import com.maeng0830.fastlms.admin.model.MemberInput;
 import com.maeng0830.fastlms.admin.model.MemberParam;
 import com.maeng0830.fastlms.admin.service.CategoryService;
-import com.maeng0830.fastlms.member.service.MemberService;
-import com.maeng0830.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

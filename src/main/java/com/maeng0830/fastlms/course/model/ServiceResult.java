@@ -1,6 +1,5 @@
 package com.maeng0830.fastlms.course.model;
 
-import com.maeng0830.fastlms.admin.model.CommonParam;
 import lombok.Data;
 
 @Data
@@ -9,4 +8,16 @@ public class ServiceResult {
     String message;
 
 
+    public ServiceResult(boolean result, String message) {
+        this.result = result;
+        this.message = message;
+    }
+
+    public ServiceResult(boolean result) {
+        this.result = result;
+    }
+
+    public ServiceResult() {
+        this.result = true;
+    }
 }

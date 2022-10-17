@@ -19,6 +19,7 @@
                     }
 
                     var $thisForm = $(this);
+
                     var url = '/api/course/req.api';
                     var parameter = {
                         courseId: $thisForm.find('input[name=id]').val()
@@ -58,6 +59,10 @@
             <div>
                 <p>정상가: <span th:text="${detail.price}"></span></p>
                 <p>판매가: <span th:text="${detail.salePrice}"></span></p>
+            </div>
+
+            <div>
+                <img th:src="${detail.urlFileName}"/>
             </div>
 
             <div>

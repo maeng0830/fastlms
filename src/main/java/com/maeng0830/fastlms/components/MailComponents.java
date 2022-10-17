@@ -1,7 +1,6 @@
 package com.maeng0830.fastlms.components;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -13,15 +12,6 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class MailComponents {
     private final JavaMailSender javaMailSender;
-
-    public void sendMailTest() {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("kmk930830@naver.com");
-        msg.setSubject("안녕하세요. 회원 가입 안내 메일입니다.");
-        msg.setText("안녕하세요. 반갑습니다.");
-
-        javaMailSender.send(msg);
-    }
 
     public boolean sendMail(String mail, String subject, String text) {
         boolean result = false;

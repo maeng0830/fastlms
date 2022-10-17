@@ -1,25 +1,28 @@
-package com.maeng0830.fastlms.course.controller;
+package com.maeng0830.fastlms.admin.controller;
 
-import com.maeng0830.fastlms.admin.dto.MemberDto;
-import com.maeng0830.fastlms.admin.model.MemberParam;
 import com.maeng0830.fastlms.admin.service.CategoryService;
+import com.maeng0830.fastlms.util.BaseController;
 import com.maeng0830.fastlms.course.dto.CourseDto;
 import com.maeng0830.fastlms.course.model.CourseInput;
 import com.maeng0830.fastlms.course.model.CourseParam;
 import com.maeng0830.fastlms.course.service.CourseService;
-import com.maeng0830.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class AdminCourseController extends BaseController {
@@ -50,8 +53,11 @@ public class AdminCourseController extends BaseController {
         return "admin/course/list";
     }
 
+    // 에러 발생 시 다시 확인할 부분
     @GetMapping(value = {"/admin/course/add.do", "/admin/course/edit.do"})
-    public String add(Model model, HttpServletRequest request, CourseInput parameter) {
+    public String add(Model model
+            , HttpServletRequest request
+            , CourseInput parameter) {
 
         model.addAttribute("category", categoryService.list());
 
@@ -76,8 +82,37 @@ public class AdminCourseController extends BaseController {
         return "admin/course/add";
     }
 
-    @PostMapping (value = {"/admin/course/add.do", "/admin/course/edit.do"})
-    public String addSubmit(Model model, HttpServletRequest request, CourseInput parameter) {
+
+    @PostMapping(value = {"/admin/course/add.do", "/admin/course/edit.do"})
+    public String addSubmit(Model model
+            , HttpServletRequest request
+            , CourseInput parameter
+            , MultipartFile file) {
+
+        String saveFileName = "";
+        String urlFileName = "";
+
+        if (file != null) {
+
+            String originalFileName = file.getOriginalFilename();
+            String baseLocalPath = "C:\\intellij-project\\fastlms\\files";
+            String baseUrlPath = "\\files";
+
+            String[] arrFileName = getNewSaveFile(baseLocalPath, baseUrlPath, originalFileName);
+
+            saveFileName = arrFileName[0];
+            urlFileName = arrFileName[1];
+
+            try {
+                File newFile = new File(saveFileName);
+                FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(newFile));
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        parameter.setFileName(saveFileName);
+        parameter.setUrlFileName(urlFileName);
 
         boolean editMode = request.getRequestURI().contains("/edit.do");
 
@@ -101,7 +136,7 @@ public class AdminCourseController extends BaseController {
         return "redirect:/admin/course/list.do";
     }
 
-    @PostMapping ("/admin/course/delete.do")
+    @PostMapping("/admin/course/delete.do")
     public String del(Model model, HttpServletRequest request, CourseInput parameter) {
 
         boolean result = courseService.del(parameter.getIdList());

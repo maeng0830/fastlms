@@ -3,18 +3,14 @@ package com.maeng0830.fastlms.course.controller;
 import com.maeng0830.fastlms.admin.dto.CategoryDto;
 import com.maeng0830.fastlms.admin.service.CategoryService;
 import com.maeng0830.fastlms.course.dto.CourseDto;
-import com.maeng0830.fastlms.course.model.CourseInput;
 import com.maeng0830.fastlms.course.model.CourseParam;
 import com.maeng0830.fastlms.course.service.CourseService;
+import com.maeng0830.fastlms.util.BaseController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequiredArgsConstructor

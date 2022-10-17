@@ -1,11 +1,11 @@
 package com.maeng0830.fastlms.admin.controller;
 
 import com.maeng0830.fastlms.admin.dto.MemberDto;
+import com.maeng0830.fastlms.admin.dto.MemberLoginHistoryDto;
 import com.maeng0830.fastlms.admin.model.MemberInput;
 import com.maeng0830.fastlms.admin.model.MemberParam;
-import com.maeng0830.fastlms.course.controller.BaseController;
+import com.maeng0830.fastlms.util.BaseController;
 import com.maeng0830.fastlms.member.service.MemberService;
-import com.maeng0830.fastlms.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,8 +49,11 @@ public class AdminMemberController extends BaseController {
         parameter.init();
 
         MemberDto member = memberService.detail(parameter.getUserId());
-
         model.addAttribute("member", member);
+
+        // memberLoginHistory 관련 내용 추가
+        List<MemberLoginHistoryDto> memberLoginHistoryDtoList  = memberService.memberLoginHistory(parameter.getUserId());
+        model.addAttribute("list", memberLoginHistoryDtoList);
 
         return "admin/member/detail";
     }
