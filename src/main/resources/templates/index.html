@@ -15,7 +15,7 @@
         <div class="home__slider">
             <div class="bxslider">
                 <div th:each="banner: ${list}">
-                    <a th:ref="${banner.linkUrl}" th:target="${banner.openMethod}"><img th:src="${banner.urlFileName}" th:alt="${banner.bannerName}"></a>
+                    <a th:href="${banner.linkUrl}" th:target="${banner.openMethod}"><img th:src="${banner.urlFileName}" th:alt="${banner.bannerName}"></a>
                 </div>
             </div>
         </div>
@@ -24,7 +24,8 @@
     <script>
         $(function(){
             $('.bxslider').bxSlider({
-                slideWidth: 1000
+                slideWidth: 1000,
+                touchEnabled : (navigator.maxTouchPoints > 0)
             });
         });
     </script>
